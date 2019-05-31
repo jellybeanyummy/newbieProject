@@ -1,0 +1,24 @@
+{
+  "name": "sparcs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jellybeanyummy/newbieProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jellybeanyummy/newbieProject/issues"
+  },
+  "homepage": "https://github.com/jellybeanyummy/newbieProject#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.5.12"
+  }
+}
