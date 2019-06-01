@@ -66,7 +66,7 @@ module.exports = (app, User) => {
   });
 
   app.post('/api/add', (req, res) => {
-    if (req.body.nickname.length === 0 || req.body.id.length === 0 || req.body.pw.length === 0 || req.body.pwcheck.length === 0) {
+    if (req.body.name.length === 0 || req.body.id.length === 0 || req.body.pw.length === 0 || req.body.pwcheck.length === 0) {
       console.log('Wrong input');
       return res.redirect('/sign_up');
     }
