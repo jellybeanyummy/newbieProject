@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./sign_up.css">
+  <title>회원가입</title>
+</head>
+<body>
+  <div class="sign-up">
+    <div class="signup-wrapper">
+      <form class="signup-form" method="POST" action="/api/add">
+        <h1>Register</h1><br>
+        <input type="text" placeholder="Username" name="name"/>
+	<input type="text" placeholder="ID" name="id"/>
+        <input type="password" placeholder="Password" name="pw"/>
+        <input type="password" placeholder="Retype Password" name="pwcheck"/>
+        <div class="button">
+          <button id="btn_signup" type="submit">Submit</button>
+        </div>
+        <br>
+        <div class="gotohome">
+          <a href="./log_in.html">Main</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

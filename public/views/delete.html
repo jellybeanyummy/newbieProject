@@ -1,0 +1,28 @@
+CTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./log_in.css">
+  <title>ID 삭제</title>
+</head>
+<body>
+  <div class="login">
+    <div class="login-wrapper">
+      <form class="login-form" method="GET" action="/api/delete">
+        <h1>Delete ID</h1><br>
+        <input type="text" placeholder="Username" name="id"/>
+        <div class="button">
+          <button id="btn_login" type="submit">Submit</button>
+        </div>
+        <br>
+      </form>
+      <div class="sign-up">
+        <a href="./log_in.html">Main</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
