@@ -1,7 +1,11 @@
 module.exports = (app, User) => {
   
   app.get('/', (req, res) => {
-    return res.render('log_in.html');
+    return res.render('home.html');
+  });
+
+  app.get('/log_in', (req, res) => {
+    res.render('log_in.html');
   });
   
   app.get('/sign_up', (req, res) => {

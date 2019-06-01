@@ -1,0 +1,22 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:400,500,600,700);
+
+/*  General */
+html, 
+body {
+  height: 100%
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.8;
+  color: #999
+}
+
+.no-padding {
+  padding-left: 0;
+  padding-right: 0;
+
+.main-container {
+  padding: 100px 0;
+}
+
+.center {
+  text-align: center;
+}
