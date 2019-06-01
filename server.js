@@ -11,6 +11,8 @@ const PORT = process.env.PORT;
 
 // Static File Service
 app.use(express.static('public/views');
+app.set('views', __dirname + 'public/views');
+app.engine('html', require('ejs').renderFile);
 
 // Body-Parser
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,5 +24,9 @@ mongoose.connect(process.env.MONGO_URI, { useMongoClient: true })
   .then(() => console.log('Successfully connected to mongodb'))
   .catch(e => console.error(e));
 
+// Router
+const User = require('./models/user.js');
+const router = require('./routes.router.js')(app, User);
+
 // port
-app.listen(port, () => console.log(`Server listening on port ${port}`));
+const server = app.listen(port, () => console.log(`Server listening on port ${port}`));
