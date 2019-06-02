@@ -19,9 +19,9 @@ jQuery(document).ready(function($){
 
 	function initHeadline() {
 		//insert <i> element for each letter of a changing word
-		singleLetters($('.box-headline.letters').find('b'));
+		singleLetters($('.game-headline.letters').find('b'));
 		//initialise headline animation
-		animateHeadline($('.box-headline'));
+		animateHeadline($('.game-headline'));
 	}
 
 	function singleLetters($words) {
@@ -45,20 +45,20 @@ jQuery(document).ready(function($){
 			
 			if(headline.hasClass('loading-bar')) {
 				duration = barAnimationDelay;
-				setTimeout(function(){ headline.find('.box-words-wrapper').addClass('is-loading') }, barWaiting);
+				setTimeout(function(){ headline.find('.gamw-words-wrapper').addClass('is-loading') }, barWaiting);
 			} else if (headline.hasClass('clip')){
-				var spanWrapper = headline.find('.box-words-wrapper'),
+				var spanWrapper = headline.find('.game-words-wrapper'),
 					newWidth = spanWrapper.width() + 10
 				spanWrapper.css('width', newWidth);
 			} else if (!headline.hasClass('type') ) {
-				//assign to .box-words-wrapper the width of its longest word
-				var words = headline.find('.box-words-wrapper b'),
+				//assign to .game-words-wrapper the width of its longest word
+				var words = headline.find('.game-words-wrapper b'),
 					width = 0;
 				words.each(function(){
 					var wordWidth = $(this).width();
 				    if (wordWidth > width) width = wordWidth;
 				});
-				headline.find('.box-words-wrapper').css('width', width);
+				headline.find('.game-words-wrapper').css('width', width);
 			};
 
 			//trigger animation
@@ -69,8 +69,8 @@ jQuery(document).ready(function($){
 	function hideWord($word) {
 		var nextWord = takeNext($word);
 		
-		if($word.parents('.box-headline').hasClass('type')) {
-			var parentSpan = $word.parent('.box-words-wrapper');
+		if($word.parents('.game-headline').hasClass('type')) {
+			var parentSpan = $word.parent('.game-words-wrapper');
 			parentSpan.addClass('selected').removeClass('waiting');	
 			setTimeout(function(){ 
 				parentSpan.removeClass('selected'); 
@@ -78,22 +78,22 @@ jQuery(document).ready(function($){
 			}, selectionDuration);
 			setTimeout(function(){ showWord(nextWord, typeLettersDelay) }, typeAnimationDelay);
 		
-		} else if($word.parents('.box-headline').hasClass('letters')) {
+		} else if($word.parents('.game-headline').hasClass('letters')) {
 			var bool = ($word.children('i').length >= nextWord.children('i').length) ? true : false;
 			hideLetter($word.find('i').eq(0), $word, bool, lettersDelay);
 			showLetter(nextWord.find('i').eq(0), nextWord, bool, lettersDelay);
 
-		}  else if($word.parents('.box-headline').hasClass('clip')) {
-			$word.parents('.box-words-wrapper').animate({ width : '2px' }, revealDuration, function(){
+		}  else if($word.parents('.game-headline').hasClass('clip')) {
+			$word.parents('.game-words-wrapper').animate({ width : '2px' }, revealDuration, function(){
 				switchWord($word, nextWord);
 				showWord(nextWord);
 			});
 
-		} else if ($word.parents('.box-headline').hasClass('loading-bar')){
-			$word.parents('.box-words-wrapper').removeClass('is-loading');
+		} else if ($word.parents('.game-headline').hasClass('loading-bar')){
+			$word.parents('.game-words-wrapper').removeClass('is-loading');
 			switchWord($word, nextWord);
 			setTimeout(function(){ hideWord(nextWord) }, barAnimationDelay);
-			setTimeout(function(){ $word.parents('.box-words-wrapper').addClass('is-loading') }, barWaiting);
+			setTimeout(function(){ $word.parents('.game-words-wrapper').addClass('is-loading') }, barWaiting);
 
 		} else {
 			switchWord($word, nextWord);
@@ -102,12 +102,12 @@ jQuery(document).ready(function($){
 	}
 
 	function showWord($word, $duration) {
-		if($word.parents('.box-headline').hasClass('type')) {
+		if($word.parents('.game-headline').hasClass('type')) {
 			showLetter($word.find('i').eq(0), $word, false, $duration);
 			$word.addClass('is-visible').removeClass('is-hidden');
 
-		}  else if($word.parents('.box-headline').hasClass('clip')) {
-			$word.parents('.box-words-wrapper').animate({ 'width' : $word.width() + 10 }, revealDuration, function(){ 
+		}  else if($word.parents('.game-headline').hasClass('clip')) {
+			$word.parents('.game-words-wrapper').animate({ 'width' : $word.width() + 10 }, revealDuration, function(){ 
 				setTimeout(function(){ hideWord($word) }, revealAnimationDelay); 
 			});
 		}
@@ -134,7 +134,7 @@ jQuery(document).ready(function($){
 		if(!$letter.is(':last-child')) { 
 			setTimeout(function(){ showLetter($letter.next(), $word, $bool, $duration); }, $duration); 
 		} else { 
-			if($word.parents('.box-headline').hasClass('type')) { setTimeout(function(){ $word.parents('.box-words-wrapper').addClass('waiting'); }, 200);}
+			if($word.parents('.game-headline').hasClass('type')) { setTimeout(function(){ $word.parents('.game-words-wrapper').addClass('waiting'); }, 200);}
 			if(!$bool) { setTimeout(function(){ hideWord($word) }, animationDelay) }
 		}
 	}

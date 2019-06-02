@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Home</title>
-  <link rel="icon" href="img/sparcs.png" type="image/x-icon">  
+  <!--<link rel="icon" href="img/logo.png" type="image/x-icon">  -->
   <!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="ionicons/css/ionicons.min.css" rel="stylesheet">
@@ -33,7 +33,7 @@
     <!-- game header -->
     <header class="game-header">
       <div class="game-logo">
-	<a href="index.html"><img src="img/logo.png" width="80" alt="Logo"></a>
+	<a href="/"><img src="img/logo.png" width="15" alt="Logo"></a>
       </div>
       <!-- game-nav -->
       <a class="game-primary-nav-trigger" href="#0">
@@ -49,7 +49,14 @@
 	
 	<li><a href="shop.html">Shop</a></li>
 	<li><a href="leaderboard.html">Leaderboard</a></li>
-      <ul>
+
+	<li class="game-label">Follow me</li>
+	
+	<li class="game-social"><a href="#0"><i class="ion-social-facebook"></i></a></li>
+                <li class="game-social"><a href="#0"><i class="ion-social-instagram-outline"></i></a></li>
+                <li class="game-social"><a href="#0"><i class="ion-social-twitter"></i></a></li>
+                <li class="game-social"><a href="#0"><i class="ion-social-dribbble"></i></a></li>
+      </ul>
     </nav>
 
     <!-- game intro -->
@@ -63,10 +70,9 @@
 	  </span>
 	</h1>
 	<h5>Let's go! Nubjukee</h5>
-      </div>
-
-      <div class="button">
-	<button id="btn_logintoplay" type="button">Login to Play</button>
+	<div class="button">
+	  <button id="btn_logintoplay" type="button" onclick="location.href='/log_in'">Login to Play</button>
+	</div>
       </div>
     </section>
   </div>
