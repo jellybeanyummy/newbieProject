@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 module.exports = (app, User) => {
   
   app.get('/', (req, res) => {
@@ -22,6 +24,10 @@ module.exports = (app, User) => {
 
   app.get('/delete', (req, res) => {
     res.render('delete.html');
+  });
+
+  app.get('/profile', (req, res) => {
+    res.render('profile.html');
   });
 
   app.get('/api/find_pw', (req, res) => {
@@ -80,25 +86,27 @@ module.exports = (app, User) => {
     }
 
     User.findOne({id: req.body.id}, (err, user) => {
-      if (err) return res.redirect('/sign_up');
+      if (err) {
+	return res.redirect('/sign_up');
+      }
       else if (user !== null) {
         console.log('ID already exists');
         return res.redirect('/sign_up');
       }
-      else {
-        const newuser = new User();
-        newuser.id = req.body.id;
-        newuser.pw = req.body.pw;
-        newuser.nickname = req.body.nickname;
-    
-        newuser.save(err => {
-          if (err) {
-            console.log(err);
-            return res.redirect('/sign_up');
-          }
-          console.log('good database created');
-          return res.redirect('/');
-        });
+      else {	
+        bcrypt.hash(req.body.pw, 10, function(err, hash) {
+	if (err) {
+	    console.log(err);
+	  }
+	  new User({"id":req.body.id, "pw":hash, "name":req.body.name}).save((err)=>{
+	    if(err){
+	      console.log(err);
+	      return res.redirect('/sign_up');	
+	    }
+	    console.log('good database created');
+            return res.redirect('/');
+	  })
+	});
       }
     });
   });
@@ -134,5 +142,38 @@ module.exports = (app, User) => {
       }
     });
   });
-  
+
+  app.post('/api/login', (req, res) => {
+    if (req.body.id && req.body.pw) {
+      User.authenticate(req.body.id, req.body.pw, function (err, user) {
+	if (err || !user) {
+	  var err = new Error('Wrong email or password!');
+	  err.status = 401;
+	  console.log(err);
+          return res.redirect('/log_in');
+        } else {
+          req.session.user_id = user.id;
+	  req.session.user_name = user.name;
+          return res.redirect('/profile');
+        }
+      });
+    } else {
+      var err = new Error('All fields are required!');
+      err.status = 400;
+      console.log(err);
+      return res.redirect('/log_in');
+    }
+  });
+
+  app.post('/api/logout', (req, res) => {
+    if (req.session) {
+      req.session.destroy(function (err) {
+        if (err) {
+          return next(err);
+        } else {
+          return res.redirect('/');
+        }
+      });
+    }
+  });
 }

@@ -14,6 +14,11 @@ body {
   padding-right: 0;
 }
 
+.no-padding [class^="col-"] {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 .main-container {
     padding: 100px 0;
 }
@@ -444,13 +449,13 @@ b i:last-child {
 }
 
 .game-headline.rotate-2 i.in {
-    -webkit-animation: box-rotate-2-in 0.4s forwards;
-    animation: box-rotate-2-in 0.4s forwards;
+    -webkit-animation: game-rotate-2-in 0.4s forwards;
+    animation: game-rotate-2-in 0.4s forwards;
 }
 
 .game-headline.rotate-2 i.out {
-    -webkit-animation: box-rotate-2-out 0.4s forwards;
-    animation: box-rotate-2-out 0.4s forwards;
+    -webkit-animation: game-rotate-2-out 0.4s forwards;
+    animation: game-rotate-2-out 0.4s forwards;
 }
 
 .game-headline.rotate-2 em {
@@ -539,8 +544,70 @@ b i:last-child {
     }
 }
 
+#btn_logintoplay {
+  border-radius: 4px;
+  margin: 3px 0;
+  background-color: white;
+  color: black;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+
+#btn_logintoplay:hover {
+  background-color: #393939;
+  color: white;
+}
+
+/* login */
+.login-wrapper {
+    text-align: center;
+}
+
+.login h1 {
+    font-weight: 100;
+    text-align: center;
+    font-size: 2.3em;
+}
+
+.button {
+    text-align: center;
+    margin: auto;
+    width: 20%;
+}
+
+.sign-up {
+    margin: auto;
+    width: 40%;
+}
+
+.login-wrapper input[type=text], input[type=password] {
+    height: 44px;
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 10px;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-top: 1px solid #c0c0c0;
+    padding: 0 8px;
+    box-sizing: border-box;
+}
+
+.login {
+    padding: 40px;
+    width: 274px;
+    background-color:white;
+    margin: 90px auto;
+    border-radius: 2px;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    /* display: grid;    grid-template-rows: 1fr 3fr;    grid-template-columns: 1fr 2fr 1fr;    grid-template-areas: "navbar navbar navbar"                         "form form form" */
+}
+
 /* footer */
 footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     padding: 30px 0;
     text-align: center;
     background: #f5f5f5
