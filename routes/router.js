@@ -61,18 +61,33 @@ module.exports = (app, User) => {
   });
 
   app.get('/api/delete', (req, res) => {   
-    if (req.query.id.length === 0) {
+    if (req.query.id.length === 0 || req.query.pw.length === 0 || req.query.pwcheck.length === 0) {
       console.log('Wrong input');
-      return res.redirect('/find_pw');
+      return res.redirect('/delete');
     }
-    User.deleteOne({id: req.query.id}, (err) => {
-      if (err) {
-        console.log(err);
-        return res.redirect('/delete');
-      }
-      console.log('data successfully deleted');
-      return res.redirect('/');
-    });
+    else if (req.body.pw !== req.body.pwcheck) {
+      console.log('PW and Retype PW is different');
+      return res.redirect('/delete');
+    }
+    else {
+      User.authenticate(req.body.id, req.body.pw, function (err, user) {
+        if (err || !user) {
+          var err = new Error('Wrong email or password!');
+          err.status = 401;
+          console.log(err);
+          return res.redirect('/delete');
+        } else {
+          User.deleteOne({id: req.query.id, pw:req.query.pw}, (err) => {
+            if (err) {
+      	      console.log(err);
+  	      return res.redirect('/delete');
+ 	    }
+	    console.log('user successfully deleted');
+	    return res.redirect('/delete');
+	  });
+        }
+      });
+    }
   });
 
   app.post('/api/add', (req, res) => {
