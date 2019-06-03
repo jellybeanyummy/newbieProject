@@ -46,7 +46,7 @@
     <nav>
       <ul class="game-primary-nav">
     	<li class="game-label">Play!</li>
-	<li><form action="/api/logout" method="POST"><a>Logout</a></li>
+	<li><a href="/logout">Logout</a></li>
 	<li><a href="/profile">My Page</a></li>
         <li><a href="/leaderboard">Leaderboard</a></li>
         <li><a href="/update_pw">Change PW</a></li>
@@ -61,8 +61,16 @@
       </ul>
     </nav>
 
+  <section class="game-intro">
+  <div class="table-cell">
+  <script>
+    document.getElementById=('name').innerHTML=(String)session.getAttribute("user_name");
+  </script>
+  <p id="name">의 넙죽이</p>
+  <img src="png/nubjuk.png" width="400">
+  </div>
+  </section>
   
-
   <!-- footer -->
   <footer>
     <div class="container-fluid">

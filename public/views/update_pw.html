@@ -35,7 +35,7 @@
     <nav>
       <ul class="game-primary-nav">
         <li class="game-label">Play!</li>
-        <li><form action="/api/logout" method="POST"><a>Logout</a></li>
+        <li><a href="/logout">Logout</a></li>
         <li><a href="/profile">My Page</a></li>
         <li><a href="/leaderboard">Leaderboard</a></li>
         <li><a href="/update_pw">Change PW</a></li>
@@ -55,15 +55,16 @@
       <form class="login-form" method="POST" action="/api/update_pw">
         <h1>Update PW</h1><br>
         <input type="text" placeholder="Username" name="id"/>
-        <input type="password" placeholder="Password" name="pw"/>
-        <input type="password" placeholder="Retype Password" name="pwcheck"/>
+        <input type="password" placeholder="Password" name="oldpw"/>
+        <input type="password" placeholder="New Password" name="pw"/>
+        <input type="password" placeholder="Retype New Password" name="pwcheck"/>
         <div class="button">
-          <button id="btn_login" type="submit">Submit</button>
+          <button id="btn_updatepw" type="submit">Submit</button>
         </div>
         <br>
       </form>
       <div class="sign-up">
-        <a href="./log_in.html">Main</a>
+        <a href="/profile">Main</a>
       </div>
     </div>
   </div>

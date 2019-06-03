@@ -569,10 +569,9 @@ b i:last-child {
     font-size: 2.3em;
 }
 
-.button {
-    text-align: center;
-    margin: auto;
-    width: 20%;
+#btn_login #btn_signup #btn_updatepw #btn_delete {
+  margin: auto;
+  width: 20%;
 }
 
 .sign-up {

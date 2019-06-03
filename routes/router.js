@@ -30,6 +30,10 @@ module.exports = (app, User) => {
     res.render('profile.html');
   });
 
+  app.get('/logout', (req, res) => {
+    res.redirect('/api/logout');
+  });
+
   app.get('/api/find_pw', (req, res) => {
     if (req.query.id.length === 0) {
       console.log('Wrong input');
@@ -65,25 +69,25 @@ module.exports = (app, User) => {
       console.log('Wrong input');
       return res.redirect('/delete');
     }
-    else if (req.body.pw !== req.body.pwcheck) {
+    else if (req.query.pw !== req.query.pwcheck) {
       console.log('PW and Retype PW is different');
       return res.redirect('/delete');
     }
     else {
-      User.authenticate(req.body.id, req.body.pw, function (err, user) {
+      User.authenticate(req.query.id, req.query.pw, function (err, user) {
         if (err || !user) {
           var err = new Error('Wrong email or password!');
           err.status = 401;
           console.log(err);
           return res.redirect('/delete');
         } else {
-          User.deleteOne({id: req.query.id, pw:req.query.pw}, (err) => {
+          User.deleteOne({id: req.query.id}, (err) => {
             if (err) {
       	      console.log(err);
   	      return res.redirect('/delete');
  	    }
 	    console.log('user successfully deleted');
-	    return res.redirect('/delete');
+	    return res.redirect('/');
 	  });
         }
       });
@@ -119,7 +123,7 @@ module.exports = (app, User) => {
 	      return res.redirect('/sign_up');	
 	    }
 	    console.log('good database created');
-            return res.redirect('/');
+            return res.redirect('/log_in');
 	  })
 	});
       }
@@ -127,7 +131,7 @@ module.exports = (app, User) => {
   });
 
   app.post('/api/update_pw', (req, res) => {
-    if (req.body.id.length === 0 || req.body.pw.length === 0 || req.body.pwcheck.length === 0) {
+    if (req.body.id.length === 0 || req.body.oldpw.length === 0 || req.body.pw.length === 0 || req.body.pwcheck.length === 0) {
       console.log('Wrong input');
       return res.redirect('/update_pw');
     }
@@ -144,9 +148,16 @@ module.exports = (app, User) => {
         return res.redirect('/update_pw');
       }
       else {
-        user.pw = req.body.pw;
-    
-        user.save(err => {
+        User.authenticate(req.body.id, req.body.oldpw, function (err, user) {
+        if (err || !user) {
+          var err = new Error('Wrong email or password!');
+          err.status = 401;
+          console.log(err);
+          return res.redirect('/update_pw');
+        } else {
+        bcrypt.hash(req.body.pw, 10, (err, hash) => {
+        user.pw = hash;
+	user.save(err => {
           if (err) {
             console.log(err);
             return res.redirect('/update_pw');
@@ -154,6 +165,9 @@ module.exports = (app, User) => {
           console.log('database successfully updated');
           return res.redirect('/');
         });
+	});
+        }
+      });
       }
     });
   });
@@ -180,7 +194,7 @@ module.exports = (app, User) => {
     }
   });
 
-  app.post('/api/logout', (req, res) => {
+  app.get('/api/logout', (req, res) => {
     if (req.session) {
       req.session.destroy(function (err) {
         if (err) {
