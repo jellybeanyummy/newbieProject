@@ -4,7 +4,11 @@ const bcrypt = require('bcrypt');
 const userSchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true }, 
   pw: { type: String, required: true }, 
-  name: { type: String }
+  name: { type: String }, 
+  money: { type: Number, default: 100 }, 
+  skill: { type: [Number], default: [0]}, 
+  clothes: { type: [Number], default: [0]},
+  weapon: { type: [Number], default: [0]} 
 });
 
 userSchema.statics.authenticate = function (id, pw, callback) {
