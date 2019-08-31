@@ -25,7 +25,7 @@ export default function authentication(state = initialState, action) {
           error: -1
         }
       }
-    case type.AUTH_REGISTER_SUCCESS: 
+    case types.AUTH_REGISTER_SUCCESS: 
       return {
         ...state, 
         register: {
@@ -33,7 +33,7 @@ export default function authentication(state = initialState, action) {
           status: 'SUCCESS'
         }
       }
-    case type.AUTH_REGISTER_FAILURE: 
+    case types.AUTH_REGISTER_FAILURE: 
       return {
         ...state, 
         register: {

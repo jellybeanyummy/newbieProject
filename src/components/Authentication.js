@@ -12,4 +12,66 @@ class Authentication extends Component {
           name="username"
           type="text"
           className="validate"/>
-       </div>
+        </div>
+
+        <div className="input-field col s12">
+          <label>Password</label>
+          <input
+          name="password"
+          type="password"
+          className="validate"/>
+        </div>
+      </div>
+    );
+    
+    const loginView = (
+      <div>
+        <div className="card-content">
+          <div className="row">
+            {inputBoxes}
+            <a className="waves-effect waves-light btn">SUBMIT</a>
+          </div>
+        </div>
+
+        <div className="footer">
+          <div className="card-content">
+            <div className="right">
+            New Here? <Link to="/register">Create an account</Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+
+    const registerView = (
+      <div className="card-content">
+        <div className="row">
+          {inputBoxes}
+          <a className="waves-effect waves-light btn">SUBMIT</a>
+        </div>
+      </div>
+    );
+
+    return (
+      <div className="container auth">
+        <Link className="logo" to="/">Scrapbook</Link>
+        <div className="card">
+          <div className="header blue white-text center">
+            <div className="card-content">{this.props.mode ? "LOGIN" : "REGISTER"}</div>
+          </div>
+          {this.props.mode ? loginView : RegisterView }
+        </div>
+      </div>
+    );
+  }
+}
+
+Authentication.propTypes = {
+  mode: PropTypes.bool
+};
+
+Authentication.defaultProps = {
+  mode: true
+};
+
+export default Authentication;
