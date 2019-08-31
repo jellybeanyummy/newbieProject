@@ -1,10 +1,13 @@
 {
   "name": "sparcs",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --host 0.0.0.0 --post 80",
+    "clean": "rm -rf build public/bundle.js",
+    "build": "babel server --out-dir build --presets=es2015 && webpack",
+    "win_start": "cross-env NODE_ENV=production node ./build/main.js"
   },
   "repository": {
     "type": "git",
@@ -12,19 +15,48 @@
   },
   "author": "",
   "license": "ISC",
+  "babel": {
+    "presets": [
+      "env",
+      "react",
+      "stage-2"
+    ]
+  },
   "bugs": {
     "url": "https://github.com/jellybeanyummy/newbieProject/issues"
   },
   "homepage": "https://github.com/jellybeanyummy/newbieProject#readme",
   "dependencies": {
     "axios": "^0.19.0",
-    "bcrypt": "^3.0.6",
+    "babel-preset-es2015": "^6.24.1",
     "body-parser": "^1.19.0",
-    "connect-mongo": "^2.0.3",
-    "dotenv": "^8.0.0",
-    "ejs": "^2.6.1",
     "express": "^4.17.1",
-    "express-session": "^1.16.1",
-    "mongoose": "^5.5.12"
-  }
+    "express-session": "^1.16.2",
+    "mongoose": "^5.6.11",
+    "morgan": "^1.9.1",
+    "path": "^0.12.7",
+    "pbkdf2-password": "^1.2.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-redux": "^7.1.1",
+    "react-router-dom": "^5.0.1",
+    "react-timeago": "^4.4.0",
+    "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "css-loader": "^3.2.0",
+    "react-hot-loader": "^4.12.12",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7",
+    "webpack-dev-server": "^3.8.0"
+  },
+  "keywords": [],
+  "description": ""
 }
