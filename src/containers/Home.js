@@ -62,13 +62,13 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (Dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     memoPostRequest: (contents) => {
       return dispatch(memoPostRequest(contents));
     },
     memoListRequest: (isInitial, listType, id, username) => {
-      return dispatch(memoListRequest(isInitial, listType, id , username));
+      return dispatch(memoListRequest(isInitial, listType, id, username));
     }
   };
 };

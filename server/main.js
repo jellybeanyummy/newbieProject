@@ -32,10 +32,6 @@ app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, './../dist/index.html'));
 });
 
-app.get('/hello', (req, res) => {
-  return res.send('Scrapbook');
-});
-
 app.listen(port, () => {
   console.log('Express is listening on port', port);
 });

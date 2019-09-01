@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 class MemoList extends Component {
   render() {
-    const mapTocomponents = data => {
+    const mapToComponents = data => {
       return data.map((memo, i) => {
         return (
           <Memo
