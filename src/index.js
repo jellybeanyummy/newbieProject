@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrouserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Register, Login, App } from './containers/index';
 
 import { Provider } from 'react-redux';
@@ -20,7 +20,7 @@ ReactDOM.render(
         <Route path="/register" component={Register}/>
         <Route path="/login" component={Login}/>
       </div>
-    </Router>
+    </Router>¥
   </Provider>
   , 
   document.getElementById('root')

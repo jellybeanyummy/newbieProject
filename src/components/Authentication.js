@@ -116,7 +116,7 @@ class Authentication extends Component {
           <div className="header blue white-text center">
             <div className="card-content">{this.props.mode ? "LOGIN" : "REGISTER"}</div>
           </div>
-          {this.props.mode ? loginView : RegisterView }
+          {this.props.mode ? loginView : registerView }
         </div>
       </div>
     );

@@ -1,4 +1,4 @@
-import react, { Component } from 'react';
+import React, { Component } from 'react';
 import { Header } from './../components/index';
 import { connect } from 'react-redux';
 import { getStatusRequest, logoutRequest } from './../actions/authentication';

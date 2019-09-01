@@ -49,5 +49,4 @@ Header.defaultProps = {
   isLoggedIn: false, 
   onLogout: () => { console.error("logout function os not defined");}
 };
-
 export default Header;
