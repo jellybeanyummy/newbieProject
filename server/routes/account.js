@@ -33,7 +33,7 @@ router.post('/signup', (req, res) => {
     }
  
     hasher({ password: req.body.password }, function(err, pass, salt, hash) {
-      let account = new Account {
+      let account = new Account({
         username: req.body.username,
         password: hash,
         salt: salt
@@ -74,7 +74,7 @@ router.post('/signin', (req, res) => {
         });
       } else {
         return res.status(401).json({
-          error: "PASSWORD IS NOT CORRECT"
+          error: "PASSWORD IS NOT CORRECT", 
           code: 3
         });
       }
