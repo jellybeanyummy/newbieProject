@@ -42,7 +42,7 @@ class Header extends Component {
 
 Header.propTypes = {
   isLoggedIn: PropTypes.bool, 
-  onLogout: PropsTypes.func
+  onLogout: PropTypes.func
 };
 
 Header.defaultProps = {

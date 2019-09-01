@@ -67,7 +67,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getStatusRequest: () => {
       return dispatch(getStatusRequest());
-    }
+    },
     logoutRequest: () => {
       return dispatch(logoutRequest());
     }
