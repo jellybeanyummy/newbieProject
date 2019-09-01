@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Register, Login, App } from './containers/index';
+import { Register, Login, App, Home } from 'containers';
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import reducers from './reducers/index';
+import reducers from 'reducers';
 import thunk from 'redux-thunk';
 
 const store = createStore(reducers, applyMiddleware(thunk));
@@ -17,10 +17,11 @@ ReactDOM.render(
     <Router>
       <div>
         <Route path="/" component={App}/>
+        <Route exact path='/' component={Home}/>
         <Route path="/register" component={Register}/>
         <Route path="/login" component={Login}/>
       </div>
-    </Router>¥
+    </Router>
   </Provider>
   , 
   document.getElementById('root')

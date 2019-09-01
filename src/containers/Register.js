@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Authentication } from './../components/index';
+import { Authentication } from 'components';
 import { connect } from 'react-redux';
-import { registerRequest } from './../actions/authentication';
+import { registerRequest } from 'actions/authentication';
 
 class Register extends Component {
   handleRegister = (id, pw) => {

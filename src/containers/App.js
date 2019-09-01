@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Header } from './../components/index';
+import { Header } from 'components';
 import { connect } from 'react-redux';
-import { getStatusRequest, logoutRequest } from './../actions/authentication';
+import { getStatusRequest, logoutRequest } from 'actions/authentication';
 
 class App extends Component {
   componentDidMount() {
