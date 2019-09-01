@@ -83,10 +83,18 @@ router.post('/signin', (req, res) => {
 });
 
 router.get('/getinfo', (req, res) => {
-  res.json({ info: null });
+  if (typeof req.session.loginInfo === "undefined") {
+    return res.status(401).json({
+      error: "THERE IS NO LOGIN DATA", 
+      code: 1
+    });
+  }
+
+  res.json({ info: req.session.loginInfo });
 });
 
 router.post('/logout', (req, res) => {
+  req.session.destroy(err => { if (err) throw err; });
   return res.json({ success: true });
 });
 

@@ -67,6 +67,41 @@ export default function authentication(state = initialState, action) {
           status: "FAILURE"
         }
       }
+    case types.AUTH_GET_STATUS: 
+      return {
+        ...state, 
+        status: {
+          ...state.status, 
+          isLoggedIn: true
+        }
+      }
+    case types.AUTH_GET_STATUS_SUCCESS:
+      return {
+        ...state, 
+        status: {
+          ...state.status, 
+          valid: true, 
+          currentUser: action.username
+        }
+      }
+    case types.AUTH_GET_STATUS_FAILURE: 
+      return {
+        ...state, 
+        status: {
+          ...state.status, 
+          valid: false, 
+          isLoggedIn: false
+        }
+      }
+    case types.AUTH_LOGOUT: 
+      return {
+        ...state, 
+        status: {
+          ...state.status, 
+          isLoggedIn: false, 
+          currentUser: ''
+        }
+      }
     default: 
       return state;
   }

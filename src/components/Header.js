@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class Header extends Component {
   render() {
@@ -12,7 +13,7 @@ class Header extends Component {
     );
     const logoutButton = (
       <li>
-        <a>
+        <a onClick={this.props.onLogout}>
           <i className="material-icons">lock_open</i>
         </a>
       </li>
@@ -29,8 +30,7 @@ class Header extends Component {
             
             <div className="right">
               <ul>
-                { loginButton }
-                { logoutButton }
+                { this.props.isLoggedIn ? logoutButton : loginButton }
               </ul>
             </div>
           </div>
@@ -39,5 +39,15 @@ class Header extends Component {
     );
   }
 }
+
+Header.propTypes = {
+  isLoggedIn: PropTypes.bool, 
+  onLogout: PropsTypes.func
+};
+
+Header.defaultProps = {
+  isLoggedIn: false, 
+  onLogout: () => { console.error("logout function os not defined");}
+};
 
 export default Header;
