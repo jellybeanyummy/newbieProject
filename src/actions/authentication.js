@@ -78,7 +78,7 @@ export function getStatusRequest() {
   return (dispatch) => {
     dispatch(getStatus());
 
-    return axios.get('api/account/getInfo')
+    return axios.get('/api/account/getInfo')
     .then((response) => {
       dispatch(getStatusSuccess(response.data.info.username));
     }).catch((error) => {
