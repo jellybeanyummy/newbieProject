@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --config ./webpack.config.js --mode development", 
+    "start": "webpack-dev-server --config ./webpack.config.js --mode development",
     "clean": "rm -rf build public/bundle.js",
     "build": "babel server --out-dir build --presets=es2015 && webpack",
     "win_start": "cross-env NODE_ENV=production node ./build/main.js",
@@ -37,6 +37,7 @@
     "morgan": "^1.9.1",
     "path": "^0.12.7",
     "pbkdf2-password": "^1.2.1",
+    "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.1",

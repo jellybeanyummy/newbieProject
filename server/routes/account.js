@@ -47,7 +47,39 @@ router.post('/signup', (req, res) => {
 });
 
 router.post('/signin', (req, res) => {
-  res.json({ success: true });
+  if (typeof req.body.password !== "string") {
+    return res.status(401).json({
+      error: "PASSWORD IS NOT STRING", 
+      code: 1
+    });
+  }
+
+  Account.findOne({ username: req.body.username }, (err, account) => {
+    if (err) throw err;
+    if (!account) {
+      return res.status(401).json({
+        error: "THERE IS NO USER", 
+        code: 2
+      });
+    }
+    const validate = hasher({ password: req.body.password, salt: account.salt }, function(err, pass, salt, hash) {
+      if (hash === account.password) {
+        let session = req.session;
+        session.loginInfo = {
+          _id: account._id, 
+          username: account.username
+        };
+        return res.json({
+          success: true
+        });
+      } else {
+        return res.status(401).json({
+          error: "PASSWORD IS NOT CORRECT"
+          code: 3
+        });
+      }
+    });
+  });
 });
 
 router.get('/getinfo', (req, res) => {

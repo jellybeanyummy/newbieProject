@@ -3,6 +3,56 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class Authentication extends Component {
+  state = {
+    username:"", 
+    password:""
+  }
+
+  handleChange = (e) => {
+    let nextState = {};
+    nextState[e.target.name] = e.target.value;
+    this.setState(nextState);
+  }
+
+  handleRegister = () => {
+    let id = this.state.username;
+    let pw = this.state.password;
+    this.props.onRegister(id, pw).then(
+      (result) => {
+        if(!result) {
+          this.setState({
+            username: '', 
+            password: ''
+          });
+        }
+      }
+    );
+  }
+
+  handleLogin = () => {
+    let id = this.state.username;
+    let pw = this.state.password;
+    this.props.onLogin(id, pw).then(
+      (success) => {
+        if(!success) {
+          this.setState({
+            password: ''
+          });
+        }
+      }
+    );
+  }
+  
+  handleKeyPress = (e) => {
+    if (e.charCode == 13) {
+      if (this.props.mode) {
+        this.handleLogin();
+      } else {
+        this.handleRegister();
+      }
+    }
+  } 
+
   render() {
     const inputBoxes = (
       <div>
@@ -11,7 +61,9 @@ class Authentication extends Component {
           <input
           name="username"
           type="text"
-          className="validate"/>
+          className="validate"
+          onChange={this.handleChange}
+          value={this.state.username}/>
         </div>
 
         <div className="input-field col s12">
@@ -19,7 +71,10 @@ class Authentication extends Component {
           <input
           name="password"
           type="password"
-          className="validate"/>
+          className="validate"
+          onChange={this.handleChange}
+          value={this.state.password}
+          onKeyPress={this.handleKeyPress}/>
         </div>
       </div>
     );
@@ -29,7 +84,8 @@ class Authentication extends Component {
         <div className="card-content">
           <div className="row">
             {inputBoxes}
-            <a className="waves-effect waves-light btn">SUBMIT</a>
+            <a className="waves-effect waves-light btn"
+              onClick={this.handleLogin}>SUBMIT</a>
           </div>
         </div>
 
@@ -47,7 +103,8 @@ class Authentication extends Component {
       <div className="card-content">
         <div className="row">
           {inputBoxes}
-          <a className="waves-effect waves-light btn">SUBMIT</a>
+          <a className="waves-effect waves-light btn"
+            onClick={this.handleRegister}>CREATE</a>
         </div>
       </div>
     );
@@ -67,11 +124,15 @@ class Authentication extends Component {
 }
 
 Authentication.propTypes = {
-  mode: PropTypes.bool
+  mode: PropTypes.bool, 
+  onRegister: PropTypes.func, 
+  onLogin: PropTypes.func
 };
 
 Authentication.defaultProps = {
-  mode: true
+  mode: true, 
+  onRegister: (id, pw) => { console.error("register function is not defined"); }, 
+  onLogin: (id, pw) => { console.error("login function is not defined"); }
 };
 
 export default Authentication;
