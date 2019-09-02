@@ -1,6 +1,6 @@
-import express from 'express';
-import Account from '../models/account';
-import bkfd2Password from 'pbkdf2-password';
+const express = require('express');
+const Account = require('../models/account');
+const bkfd2Password = require('pbkdf2-password');
 
 const hasher = bkfd2Password();
 const router = express.Router();
@@ -31,7 +31,7 @@ router.post('/signup', (req, res) => {
         code: 3
       });
     }
- 
+    
     hasher({ password: req.body.password }, function(err, pass, salt, hash) {
       let account = new Account({
         username: req.body.username,
@@ -46,7 +46,7 @@ router.post('/signup', (req, res) => {
   });
 });
 
-router.post('/signin', (req, res) => {
+router.post('/login', (req, res) => {
   if (typeof req.body.password !== "string") {
     return res.status(401).json({
       error: "PASSWORD IS NOT STRING", 
@@ -98,4 +98,4 @@ router.post('/logout', (req, res) => {
   return res.json({ success: true });
 });
 
-export default router;
+module.exports = router;

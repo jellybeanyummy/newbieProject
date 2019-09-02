@@ -94,6 +94,7 @@ export function memoEditRequest(id, index, contents) {
     .then((response) => {
       dispatch(memoEditSuccess(index, response.data.memo));
     }).catch((error) => {
+	console.log(error);
       dispatch(memoEditFailure(error.response.data.code));
     });
   };

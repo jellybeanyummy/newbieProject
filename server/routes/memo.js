@@ -1,6 +1,6 @@
-import express from 'express';
-import Memo from '../models/memo';
-import mongoose from 'mongoose';
+const express = require('express');
+const Memo = require('../models/memo');
+const mongoose = require('mongoose');
  
 const router = express.Router();
  
@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
 
 router.get('/:listType/:id', (req, res) => {
   let listType = req.params.listType;
-  let id = req,params.id;
+  let id = req.params.id;
   
   if (listType !== 'old' && listType !== 'new') {
     return res.status(400).json({
@@ -223,4 +223,4 @@ router.post('/star/:id', (req, res) => {
   });
 }); 
 
-export default router;
+module.exports = router;

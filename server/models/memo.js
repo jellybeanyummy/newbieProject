@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
  
 const Schema = mongoose.Schema;
  
@@ -13,4 +13,4 @@ const Memo = new Schema({
     is_edited: { type: Boolean, default: false }
 });
  
-export default mongoose.model('memo', Memo);
+module.exports = mongoose.model('memo', Memo);

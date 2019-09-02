@@ -38,6 +38,26 @@ module.exports = {
     port: 80, 
     contentBase: './dist', 
     hot: true, 
-    disableHostCheck: true
+    disableHostCheck: true, 
+    historyApiFallback: true, 
+    before: (app, server) => { 
+      const api = require('./server/routes');
+      const bodyParser = require('body-parser');
+      const mongoose = require('mongoose');
+      const morgan = require('morgan');
+      const session = require('express-session');
+      const db = mongoose.connection;
+      db.on('error', console.error);
+      db.once('open', () => { console.log('Connected to mongodb server'); });
+      mongoose.connect('mongodb://localhost/db_forNewbieProject');
+      app.use(session({
+        secret: 'ohjellybelly777',
+        resave: false,
+        saveUninitialized: true
+      }));
+      app.use(morgan('dev'));
+      app.use(bodyParser.json());
+      app.use('/api', api);
+    }
   }
 };

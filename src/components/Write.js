@@ -14,7 +14,7 @@ class Write extends Component {
 
   handlePost = () => {
     let contents = this.state.contents;
-    this.Props.onPost(contents).then(
+    this.props.onPost(contents).then(
       () => {
         this.setState({
           contents: ""

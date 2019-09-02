@@ -1,11 +1,11 @@
-import express from 'express';
-import path from 'path';
-import WebpackDevServer from 'webpack-dev-server';
-import webpack from 'webpack';
-import morgan from 'morgan';
-import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
-import session from 'express-session';
+const express = require('express');
+const path = require('path');
+const WebpackDevServer = require('webpack-dev-server');
+const webpack = require('webpack');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const session = require('express-session');
 
 const app = express();
 const port = 80;
@@ -14,7 +14,7 @@ const devPort = 80;
 const db = mongoose.connection;
 db.on('error', console.error);
 db.once('open', () => { console.log('Connected to mongodb server'); });
-mongoose.connect('mongodb://localhost/Scrapbook');
+mongoose.connect('mongodb://localhost/db_forNewbieProject');
 
 app.use(session({
   secret: 'ohjellybelly777', 
@@ -24,7 +24,7 @@ app.use(session({
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 
-import api from './routes';
+const api = require('./routes/index');
 app.use('/api', api);
 
 app.use('/', express.static(path.join(__dirname, './../dist')));

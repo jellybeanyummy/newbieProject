@@ -14,7 +14,7 @@ class App extends Component {
     let loginData = getCookie('key');
     if (typeof loginData === "undefined") return;
     loginData = JSON.parse(atob(loginData));
-    if (!loginData,isLoggedIn) return;
+    if (!loginData.isLoggedIn) return;
     
     this.props.getStatusRequest().then(
       () => {

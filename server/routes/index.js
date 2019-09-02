@@ -1,10 +1,13 @@
-import express from 'express';
-import account from './account';
-import memo from './memo';
+const express = require('express');
+const account = require('./account');
+const memo = require('./memo');
 
 const router = express.Router();
-router.use('./account', account);
-router.use('./memo', memo);
+router.use('/account', account);
+router.use('/memo', memo);
 
-export default router;
+router.get('./test', (req, res) => {res.send('hi');});
+
+module.exports = router;
+
 

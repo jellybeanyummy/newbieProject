@@ -19,7 +19,7 @@ export function registerRequest(username, password) {
     .then((response) => {
       dispatch(registerSuccess());
     }).catch((error) => {
-      dispatch(registerFailure(error.reponse.data.code));
+      dispatch(registerFailure(error.response.data.code));
     });
   };
 }
