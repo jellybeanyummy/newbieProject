@@ -11,7 +11,10 @@ import {
   MEMO_EDIT_FAILURE, 
   MEMO_REMOVE,
   MEMO_REMOVE_SUCCESS,
-  MEMO_REMOVE_FAILURE
+  MEMO_REMOVE_FAILURE, 
+  MEMO_STAR, 
+  MEMO_STAR_SUCCESS, 
+  MEMO_STAR_FAILURE
 } from './ActionTypes';
 
 export function memoPostRequest(contents) {
@@ -149,3 +152,35 @@ export function memoRemoveFailure(error) {
   };
 }
 
+export function memoStarRequest(id, index) {
+  return (dispatch) => {
+    dispatch(memoStar());
+    return axios.post('/api/memo/star/' + id)
+    .then((response) => {
+      dispatch(memoStarSuccess(index, response.data.memo));
+    }).catch((error) => {
+      dispatch(memoStarFailure(error.response.data.code));
+    });
+  };
+}
+ 
+export function memoStar() {
+  return {
+    type: MEMO_STAR
+  };
+}
+ 
+export function memoStarSuccess(index, memo) {
+  return {
+    type: MEMO_STAR_SUCCESS,
+    index,
+    memo
+  };
+}
+ 
+export function memoStarFailure(error) {
+  return{
+    type: MEMO_STAR_FAILURE,
+    error
+  };
+}

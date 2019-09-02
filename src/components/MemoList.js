@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Memo } from 'components';
 import PropTypes from 'prop-types';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class MemoList extends Component {
   render() {
@@ -14,13 +15,19 @@ class MemoList extends Component {
             index={i}
             onEdit={this.props.onEdit}
             onRemove={this.props.onRemove}
+            onStar={this.props.onStar}
+            currentUser={this.props.currentUser}
           />
         );
       });
     };
     return (
       <div>
-        { mapToComponents(this.props.data) }
+        <ReactCSSTransitionGroup transitionName="memo"
+                                 transitionEnterTimeout={2000}
+                                 transitionLeaveTimeout={1000}>
+          { mapToComponents(this.props.data) }
+        </ReactCSSTransitionGroup>
       </div>
     );
   }
@@ -30,7 +37,8 @@ MemoList.propTypes = {
   data: PropTypes.array, 
   currentUser: PropTypes.string, 
   onEdit: PropTypes.func, 
-  onRemove: PropTypes.func
+  onRemove: PropTypes.func, 
+  onStar: PropTypes.func
 };
 
 MemoList.defaultProps = {
@@ -41,6 +49,9 @@ MemoList.defaultProps = {
   }, 
   onRemove: (id, index) => {
     console.error('remove function not defined');
+  }, 
+  onStar: (id, index) => {
+    console.error('star function not defined');
   }
 };
 
