@@ -28,9 +28,6 @@ import api from './routes';
 app.use('/api', api);
 
 app.use('/', express.static(path.join(__dirname, './../dist')));
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, './../dist/index.html'));
-});
 
 app.listen(port, () => {
   console.log('Express is listening on port', port);
